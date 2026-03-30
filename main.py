@@ -20,8 +20,9 @@ def go(config: DictConfig):
         # This was passed on the command line as a comma-separated list of steps
         steps_to_execute = config["main"]["execute_steps"].split(",")
     else:
-        assert isinstance(config["main"]["execute_steps"], list)
-        steps_to_execute = config["main"]["execute_steps"]
+        steps_to_execute = OmegaConf.to_object(config["main"]["execute_steps"])
+        assert isinstance(steps_to_execute, list)
+        #steps_to_execute = config["main"]["execute_steps"]
 
     # Download step
     if "download" in steps_to_execute:
@@ -58,7 +59,7 @@ def go(config: DictConfig):
             os.path.join(root_path, "check_data"),
             "main",
             parameters={
-                "reference_artifact": config["data"]["reference_artifact"],
+                "reference_artifact": config["data"]["reference_dataset"],
                 "sample_artifact": "preprocessed_data.csv:latest",
                 "ks_alpha": config["data"]["ks_alpha"]
             },
