@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--random_state",
-        help="An integer number to use to init the random number generator. It ensures repeatibility in the"
+        help="An integer number to use to init the random number generator. It ensures repeatability in the"
              "splitting",
         type=int,
         required=False,
